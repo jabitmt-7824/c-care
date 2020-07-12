@@ -27,9 +27,11 @@ module.exports.patientRegister = async function (req, res) {
 
 module.exports.createReport = async function (req, res) {
     try {
-        let patient = Patient.findById(req.params.id);
+        let patient = await Patient.findById(req.params.id);
         if (patient) {
-            Report.create({doctor:req.user._id, patient: req.params.id, status: req.body.status, date: req.body.date });
+            let report = await Report.create({doctor:req.user._id, patient: req.params.id, status: req.body.status, date: req.body.date });
+            patient.reports.push(report);
+            patient.save();
             return res.status(200).json({
                 message: "Report Created"
             });

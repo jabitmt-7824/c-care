@@ -13,7 +13,11 @@ const patientSchema = new Schema({
      mobile:{
          type: Number,
          required: true
-     }
+     },
+     reports: [{
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Report"
+     }]
 },
     {
         timestamps: true
