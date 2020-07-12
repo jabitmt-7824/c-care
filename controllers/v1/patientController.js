@@ -1,4 +1,5 @@
 const Patient = require("../../models/patient");
+const Report = require("../../models/report");
 
 module.exports.patientRegister = async function (req, res) {
     try {
@@ -12,10 +13,32 @@ module.exports.patientRegister = async function (req, res) {
         } else {
             return res.status(409).json({
                 message: "This Patient/mobile number Already Exist",
-                patient:patient
+                patient: patient
             });
         }
 
+    } catch (err) {
+        console.log("Error", err);
+        return res.status(500), json({
+            message: "Internal Server Error"
+        });
+    }
+}
+
+module.exports.createReport = async function (req, res) {
+    try {
+        let patient = Patient.findById(req.params.id);
+        if (patient) {
+            Report.create({doctor:req.user._id, patient: req.params.id, status: req.body.status, date: req.body.date });
+            return res.status(200).json({
+                message: "Report Created"
+            });
+        }
+        else {
+            return res.status(409).json({
+                message: "This Patient not Registered In this System"
+            });
+        }
     } catch (err) {
         console.log("Error", err);
         return res.status(500), json({

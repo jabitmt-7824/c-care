@@ -6,7 +6,7 @@ const Doctor = require('../models/doctor');
 
 
 let opts = {
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken("Bearer"),
     secretOrKey: 'ccare'
 }
 
