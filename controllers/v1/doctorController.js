@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const Doctor  = require("../../models/doctor");
 
 module.exports.doctorRegistration = async function(req, res){
@@ -24,6 +25,29 @@ module.exports.doctorRegistration = async function(req, res){
         console.log("Error", err);
         return res.status(500),json({
             message:"Internal Server Error"
+        });
+    }
+}
+
+module.exports.login = async function(req, res){
+    try {
+        let doctor = await Doctor.findOne({ email: req.body.email });
+        if (!doctor || doctor.password != req.body.password) {
+            return res.status(422).json({
+                message: "invalid username or password"
+            });
+        }
+        return res.status(200).json({
+            message: "login successfully",
+            data: {
+                token: jwt.sign(doctor.toJSON(), 'ccare', { expiresIn: '2 days' })
+            }
+        }); 
+    }
+    catch (err) {
+        console.log("error", err);
+        return res.json(500, {
+            message: "internal server error"
         });
     }
 }

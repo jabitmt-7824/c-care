@@ -28,6 +28,14 @@ const doctorSchema = new Schema({
     }
 );
 
+if(!doctorSchema.options.toObject) doctorSchema.options.toObject = {};
+doctorSchema.options.toObject.transform = function(doc, ret, options){
+    delete ret.password;
+    delete ret.createdAt;
+    delete ret.updatedAt;
+    return ret;
+}
+
 const Doctor = mongoose.model("Doctor", doctorSchema);
 
 module.exports = Doctor;
