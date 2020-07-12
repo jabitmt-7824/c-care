@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// create schema for report
 const reportSchema = new Schema({
      doctor: {
          type: mongoose.Schema.Types.ObjectId,
@@ -24,6 +25,7 @@ const reportSchema = new Schema({
     }
 );
 
+// create report model
 const Report = mongoose.model("Report", reportSchema);
 
 module.exports = Report;

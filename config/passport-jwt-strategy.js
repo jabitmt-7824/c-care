@@ -10,7 +10,7 @@ let opts = {
     secretOrKey: 'ccare'
 }
 
-
+// Authenticatoion using passport-jwt
 passport.use(new JWTStrategy(opts, function(jwtPayLoad, done){
 
     Doctor.findById(jwtPayLoad._id, function(err, doctor){

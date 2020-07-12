@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// schema for doctor
 const doctorSchema = new Schema({
      name: {
          type: String,
@@ -36,6 +37,7 @@ doctorSchema.options.toObject.transform = function(doc, ret, options){
     return ret;
 }
 
+// create doctor model
 const Doctor = mongoose.model("Doctor", doctorSchema);
 
 module.exports = Doctor;
