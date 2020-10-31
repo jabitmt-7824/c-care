@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "prod_start": "env NODE_ENV=production nodemon index.js",
     "test": "mocha"
   },
   "author": "jabir mt",
@@ -18,11 +19,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.23",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "rotating-file-stream": "^2.1.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.2.0",
     "should": "^13.2.3"
   }
 }
