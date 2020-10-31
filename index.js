@@ -19,3 +19,5 @@ app.listen(port,function(err){
     }
     console.log("server is successfully setup and running on the port:", port);
 });
+
+module.exports = app

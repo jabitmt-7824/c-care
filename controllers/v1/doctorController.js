@@ -6,14 +6,14 @@ module.exports.doctorRegistration = async function(req, res){
     try {
         // check password and confirm password are same
         if (req.body.password != req.body.confirm) {
-            return res.staus(442).json({
+            return res.status(442).json({
                 message: "password and confirm password does not match"
             });
         }
         // check the given e-mail already exist 
         let doctor = await Doctor.findOne({ email: req.body.email });
         if (!doctor) {
-            // if not exist already, create/register new doctor
+            // if not exist already, register new doctor
             await Doctor.create(req.body);
 
             return res.status(200).json({
@@ -28,7 +28,7 @@ module.exports.doctorRegistration = async function(req, res){
 
     } catch (err) {
         console.log("Error", err);
-        return res.status(500),json({
+        return res.status(500).json({
             message:"Internal Server Error"
         });
     }
